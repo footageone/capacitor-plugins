@@ -1,0 +1,78 @@
+{
+  "name": "@footage.one-capacitor/asset-upload",
+  "version": "0.0.5-2",
+  "description": "Upload Media Assets by ID to URL",
+  "main": "dist/plugin.cjs.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "unpkg": "dist/plugin.js",
+  "files": [
+    "android/src/main/",
+    "android/build.gradle",
+    "dist/",
+    "ios/Plugin/",
+    "Footage.oneCapacitorAssetUpload.podspec"
+  ],
+  "author": "daniel.schuba@footage.one",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/footageone/capacitor-plugins.git"
+  },
+  "keywords": [
+    "capacitor",
+    "plugin",
+    "native"
+  ],
+  "scripts": {
+    "verify": "npm run verify:ios && npm run verify:android && npm run verify:web",
+    "verify:ios": "cd ios && pod install && xcodebuild -workspace Plugin.xcworkspace -scheme Plugin && cd ..",
+    "verify:android": "cd android && ./gradlew clean build test && cd ..",
+    "verify:web": "npm run build",
+    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- autocorrect --format",
+    "eslint": "eslint . --ext ts",
+    "prettier": "prettier \"**/*.{css,html,ts,js,java}\"",
+    "swiftlint": "node-swiftlint",
+    "docgen": "docgen --api AssetUploadPlugin --output-readme README.md --output-json dist/docs.json",
+    "build": "npm run clean && npm run docgen && tsc && rollup -c rollup.config.js",
+    "clean": "rimraf ./dist",
+    "watch": "tsc --watch",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@capacitor/android": "^4.0.1",
+    "@capacitor/core": "^4.0.1",
+    "@capacitor/docgen": "^0.2.0",
+    "@capacitor/ios": "^4.0.1",
+    "@ionic/eslint-config": "^0.3.0",
+    "@ionic/prettier-config": "^2.0.0",
+    "@ionic/swiftlint-config": "^1.1.2",
+    "eslint": "^8.21.0",
+    "prettier": "^2.7.1",
+    "prettier-plugin-java": "^1.6.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.77.3",
+    "swiftlint": "^1.0.1",
+    "typescript": "^4.7.4"
+  },
+  "peerDependencies": {
+    "@capacitor/core": "^4.0.0"
+  },
+  "prettier": "@ionic/prettier-config",
+  "swiftlint": "@ionic/swiftlint-config",
+  "eslintConfig": {
+    "extends": "@ionic/eslint-config/recommended"
+  },
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

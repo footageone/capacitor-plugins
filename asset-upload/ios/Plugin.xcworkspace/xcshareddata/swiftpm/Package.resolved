@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "MultipartFormDataKit",
+        "repositoryURL": "https://github.com/Kuniwak/MultipartFormDataKit",
+        "state": {
+          "branch": null,
+          "revision": "27bf281a9adfd742fa2fb3318c176dcc7a111599",
+          "version": "1.0.1"
+        }
+      },
+      {
+        "package": "swift-log",
+        "repositoryURL": "http://github.com/apple/swift-log",
+        "state": {
+          "branch": null,
+          "revision": "5d66f7ba25daf4f94100e7022febf3c75e37a6c7",
+          "version": "1.4.2"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

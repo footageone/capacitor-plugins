@@ -1,0 +1,25 @@
+name: Build and Publish Asset Upload
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  install:
+    uses: ./.github/workflows/install.yml
+    secrets: inherit
+    with:
+      name: asset-upload
+  build:
+    uses: ./.github/workflows/build.yml
+    needs: install
+    secrets: inherit
+    with:
+      name: asset-upload
+  publish:
+    uses: ./.github/workflows/publish.yml
+    needs: build
+    secrets: inherit
+    with:
+      name: asset-upload
+

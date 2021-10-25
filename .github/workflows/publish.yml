@@ -1,0 +1,47 @@
+name: Publish
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          PACKAGE_PATH: './${{inputs.name}}/package-lock.json'
+        with:
+          path: ${{ inputs.name }}/node_modules
+          key: ${{ inputs.name }}-cache-node-modules-${{ hashFiles(env.PACKAGE_PATH) }}
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://npm.pkg.github.com'
+          # Defaults to the user or organization that owns the workflow file
+          scope: '@@footage.one-capacitor'
+      - name: Create new prerelease
+        working-directory: ./${{ inputs.name }}
+        run: npm version prerelease
+      - name: Publish
+        working-directory: ./${{ inputs.name }}
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Get Package Version
+        id: package-version
+        uses: martinbeentjes/npm-get-version-action@main
+        with:
+          path: ./${{ inputs.name }}
+      - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "${{ inputs.name }} ${{steps.package-version.outputs.current-version}}"
+          git pull --rebase=merges
+          git push

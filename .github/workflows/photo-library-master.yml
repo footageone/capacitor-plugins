@@ -1,0 +1,24 @@
+name: Build and Publish Photo Library
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  install:
+    uses: ./.github/workflows/install.yml
+    secrets: inherit
+    with:
+      name: photo-library
+  build:
+    uses: ./.github/workflows/build.yml
+    needs: install
+    secrets: inherit
+    with:
+      name: photo-library
+  publish:
+    uses: ./.github/workflows/publish.yml
+    needs: build
+    secrets: inherit
+    with:
+      name: photo-library

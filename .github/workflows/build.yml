@@ -1,0 +1,28 @@
+name: Build Base
+
+on:
+  workflow_call:
+    inputs:
+      name:
+        required: true
+        type: string
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          PACKAGE_PATH: './${{inputs.name}}/package-lock.json'
+        with:
+          path: ${{ inputs.name }}/node_modules
+          key: ${{ inputs.name }}-cache-node-modules-${{ hashFiles(env.PACKAGE_PATH) }}
+      - name: Install
+        if: steps.npm_cache.outputs.cache-hit != 'true'
+        working-directory: ./${{ inputs.name }}
+        run: npm ci
+      - name: Build
+        working-directory: ./${{ inputs.name }}
+        run: npm run verify:ios
