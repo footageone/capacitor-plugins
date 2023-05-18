@@ -1,6 +1,6 @@
 {
   "name": "@footage.one-capacitor/asset-upload",
-  "version": "0.0.5-4",
+  "version": "0.0.5-5",
   "description": "Upload Media Assets by ID to URL",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
