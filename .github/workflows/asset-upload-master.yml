@@ -1,6 +1,7 @@
 name: Build and Publish Asset Upload
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
 
