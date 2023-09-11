@@ -1,7 +1,7 @@
 {
   "name": "@footage.one-capacitor/photo-library",
-  "version": "0.0.5-3",
-  "description": "Photo Library for Capacitor 4",
+  "version": "0.0.5-5",
+  "description": "Photo Library for Capacitor 5",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
@@ -44,11 +44,12 @@
   "devDependencies": {
     "@capacitor/android": "^5.0.0",
     "@capacitor/core": "^5.0.0",
-    "@capacitor/docgen": "^0.2.0",
+    "@capacitor/docgen": "^0.2.1",
     "@capacitor/ios": "^5.0.0",
     "@ionic/eslint-config": "^0.3.0",
     "@ionic/prettier-config": "^3.0.0",
     "@ionic/swiftlint-config": "^1.1.2",
+    "@types/node": "^20.6.0",
     "eslint": "^8.21.0",
     "prettier": "^2.7.1",
     "prettier-plugin-java": "^1.6.2",
