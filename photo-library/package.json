@@ -1,6 +1,6 @@
 {
   "name": "@footage.one-capacitor/photo-library",
-  "version": "0.0.5-6",
+  "version": "0.0.5-7",
   "description": "Photo Library for Capacitor 5",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
